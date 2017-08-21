@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+  cachier: true
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: debian-9.0
+
+suites:
+  - name: macbookpro
+    run_list:
+      - recipe[mattray::default]
+      - recipe[mattray::macbookpro]
