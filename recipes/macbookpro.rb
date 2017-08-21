@@ -17,9 +17,30 @@
 # limitations under the License.
 #
 
-# This machine has a busted USB interface, we'll remove the tools and modules
+# Enable better power management
+%w{ macfanctld thermald tlp }.each do |pkg|
+  package pkg
+end
 
-packages = %w{ bluetooth bluez libusb-0.1 libusb-1.0 usbutils }
+%w{ macfanctld thermald tlp }.each do |srvc|
+  service srvc do
+    action [:enable, :start]
+  end
+end
+
+template '/etc/macfanctl.conf' do
+  source 'macfanctl.conf.erb'
+  notifies :restart, 'service[macfanctld]'
+end
+
+# put in battery mode always
+execute 'tlp bat'
+
+# put the second hard drive to sleep, currently unused
+execute 'hdparm -Y /dev/sdb'
+
+# This machine has a busted USB interface, we'll remove the tools and modules
+packages = %w{ bluetooth bluez }
 
 packages.each do |pkg|
   package pkg do
