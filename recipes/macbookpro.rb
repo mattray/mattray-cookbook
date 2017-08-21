@@ -29,7 +29,6 @@ end
 
 reboot 'blacklist' do
   action :nothing
-  delay_mins 1
 end
 
 modules = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core }
@@ -47,5 +46,6 @@ disable = %w{ ehci_hcd uhci_hcd ehci_pci usbcore usb_common }
 disable.each do |dsbl|
   execute "rmmod #{dsbl}" do
     ignore_failure true
+    only_if "lsmod | grep #{dsbl}"
   end
 end
