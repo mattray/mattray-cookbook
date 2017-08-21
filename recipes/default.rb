@@ -43,6 +43,10 @@ file '/home/mattray/.ssh/authorized_keys' do
   group 'mattray'
 end
 
+user 'debian' do
+  action :remove
+end
+
 package 'emacs-nox'
 
 apt_update 'update' do
