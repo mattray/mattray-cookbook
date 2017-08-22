@@ -53,3 +53,9 @@ apt_update 'update' do
   frequency 86400
   action :periodic
 end
+
+%w{ exim4-base modemmanager wpasupplicant }.each do |pkg|
+  package pkg do
+    action :remove
+  end
+end
