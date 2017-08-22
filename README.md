@@ -5,7 +5,7 @@ Manages Matt Ray's machines, including a Beaglebone Black and a broken Macbook P
 ### Platforms
 
 - Beaglebone Black, ARM
-- Macbook Pro 5,1 A1286
+- MacBook Pro 6,2, Intel Core i5 M540 2.53GHz
 
 ### Chef
 
