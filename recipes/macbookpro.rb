@@ -33,6 +33,14 @@ template '/etc/macfanctl.conf' do
   notifies :restart, 'service[macfanctld]'
 end
 
+# set CPU usage to powersave mode
+file '/etc/default/cpufrequtils' do
+  content 'GOVERNOR="powersave"'
+  mode '0644'
+  owner 'root'
+  group 'root'
+end
+
 # put in battery mode always
 execute 'tlp bat'
 
@@ -52,7 +60,8 @@ reboot 'blacklist' do
   action :nothing
 end
 
-modules = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core }
+# disable loading kernel modules
+modules = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core brcmsmac b43 mac80211 }
 
 modules.each do |mod|
   file "/etc/modprobe.d/blacklist_#{mod}.conf" do
@@ -62,11 +71,22 @@ modules.each do |mod|
   end
 end
 
-disable = %w{ ehci_hcd uhci_hcd ehci_pci usbcore usb_common }
+# disable unused kernel modules
+disable = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core brcmsmac b43 mac80211 }
 
 disable.each do |dsbl|
   execute "rmmod #{dsbl}" do
     ignore_failure true
     only_if "lsmod | grep #{dsbl}"
   end
+end
+
+# enable wakeonlan
+# systemctl suspend
+# call it with wakeonlan ma:cd:ad:re:ss
+cookbook_file '/etc/network/interfaces.d/enp2s0' do
+  source 'enp2s0'
+  mode '0644'
+  owner 'root'
+  group 'root'
 end
