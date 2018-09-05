@@ -60,8 +60,7 @@ end
   end
 end
 
-sudo 'admins' do
-  users 'mattray'
-  groups 'sudo'
+sudo 'mattray' do
+  user 'mattray'
   nopasswd true
 end
