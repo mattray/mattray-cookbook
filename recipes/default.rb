@@ -59,3 +59,9 @@ end
     action :remove
   end
 end
+
+sudo 'admins' do
+  users 'mattray'
+  groups 'sudo'
+  nopasswd true
+end

@@ -11,9 +11,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: debian-9.0
+  - name: debian-9
 
 suites:
+  - name: default
+    run_list:
+      - recipe[mattray::default]
   - name: macbookpro
     run_list:
       - recipe[mattray::default]
