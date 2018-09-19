@@ -5,6 +5,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  policyfile: policies/mattray.rb
   always_update_cookbooks: true
 
 verifier:
@@ -17,7 +18,9 @@ suites:
   - name: default
     run_list:
       - recipe[mattray::default]
+  - name: beaglebone
+    provisioner:
+      named_run_list: beaglebone
   - name: macbookpro
-    run_list:
-      - recipe[mattray::default]
-      - recipe[mattray::macbookpro]
+    provisioner:
+      named_run_list: macbookpro

@@ -1,0 +1,61 @@
+{
+  "revision_id": "bf27705710028a0d915a78dc92cbda85d85e5ee5905494bf0ce0f36900105b99",
+  "name": "mattray",
+  "run_list": [
+    "recipe[mattray::default]"
+  ],
+  "named_run_lists": {
+    "beaglebone": [
+      "recipe[mattray::default]",
+      "recipe[mattray::beaglebone]"
+    ],
+    "macbookpro": [
+      "recipe[mattray::default]",
+      "recipe[mattray::macbookpro]"
+    ]
+  },
+  "included_policy_locks": [
+
+  ],
+  "cookbook_locks": {
+    "mattray": {
+      "version": "0.10.0",
+      "identifier": "bc05b061034bda42f9c75051dccc3f7144d46a06",
+      "dotted_decimal_identifier": "52923550721592282.18851982904253644.69755718625798",
+      "source": "..",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": "git@github.com:mattray/mattray-cookbook.git",
+        "revision": "9866ca0ff53799f6e6162e22943ca21ef83bed0d",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/master"
+        ]
+      },
+      "source_options": {
+        "path": ".."
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "mattray",
+        ">= 0.0.0"
+      ]
+    ],
+    "dependencies": {
+      "mattray (0.10.0)": [
+
+      ]
+    }
+  }
+}

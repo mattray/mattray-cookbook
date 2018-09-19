@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
-execute 'turn off the blinking network light' do
-  command 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
+file '/etc/init.d/beaglebone-leds' do
+  content 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
+  mode '0755'
+end
+
+link '/etc/rcS.d/S01beaglebone-leds' do
+  to '/etc/init.d/beaglebone-leds'
 end
