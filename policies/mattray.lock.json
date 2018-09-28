@@ -1,5 +1,5 @@
 {
-  "revision_id": "bf27705710028a0d915a78dc92cbda85d85e5ee5905494bf0ce0f36900105b99",
+  "revision_id": "684dc00f59787fa4b357ca938075aaf21c01a4954ad4abd752cdcc84c258814e",
   "name": "mattray",
   "run_list": [
     "recipe[mattray::default]"
@@ -19,15 +19,15 @@
   ],
   "cookbook_locks": {
     "mattray": {
-      "version": "0.10.0",
-      "identifier": "bc05b061034bda42f9c75051dccc3f7144d46a06",
-      "dotted_decimal_identifier": "52923550721592282.18851982904253644.69755718625798",
+      "version": "0.11.0",
+      "identifier": "38a48793356774f089d97183751fc9b0d79de945",
+      "dotted_decimal_identifier": "15943500893087604.67705561415906591.221761368877381",
       "source": "..",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": "git@github.com:mattray/mattray-cookbook.git",
-        "revision": "9866ca0ff53799f6e6162e22943ca21ef83bed0d",
+        "revision": "42e999387707010683453d893138b74b04cb4cdb",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [
@@ -53,7 +53,7 @@
       ]
     ],
     "dependencies": {
-      "mattray (0.10.0)": [
+      "mattray (0.11.0)": [
 
       ]
     }

@@ -17,11 +17,10 @@
 # limitations under the License.
 #
 
-file '/etc/init.d/beaglebone-leds' do
-  content 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
-  mode '0755'
+execute 'turn off the blinking network light' do
+  command 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
+  not_if { ::File.exist?('/tmp/beaglebone-leds') }
+  ignore_failure true
 end
 
-link '/etc/rcS.d/S01beaglebone-leds' do
-  to '/etc/init.d/beaglebone-leds'
-end
+file '/tmp/beaglebone-leds'
