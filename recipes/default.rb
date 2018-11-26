@@ -43,6 +43,11 @@ file '/home/mattray/.ssh/authorized_keys' do
   group 'mattray'
 end
 
+sudo 'mattray' do
+  user 'mattray'
+  nopasswd true
+end
+
 user 'debian' do
   action :remove
 end
@@ -58,9 +63,4 @@ end
   package pkg do
     action :remove
   end
-end
-
-sudo 'mattray' do
-  user 'mattray'
-  nopasswd true
 end
