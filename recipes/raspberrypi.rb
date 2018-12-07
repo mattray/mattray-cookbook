@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: MattRay
-# Recipe:: beaglebone
+# Recipe:: raspberrypi
 #
-# Copyright 2017 Matt Ray
+# Copyright 2018 Matt Ray
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,12 @@
 # limitations under the License.
 #
 
-execute 'turn off the blinking network light' do
-  command 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
-  not_if { ::File.exist?('/tmp/beaglebone-leds') }
-  ignore_failure true
+user 'pi' do
+  manage_home true
+  action :remove
 end
 
-file '/tmp/beaglebone-leds'
-
-package %w( doc-beaglebone-getting-started modemmanager wpasupplicant v4l-utils) do
+# We're not using bluetooth and other unused packages
+package %w( libraspberrypi-doc pi-bluetooth v4l-utils) do
   action :remove
 end

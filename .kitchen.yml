@@ -24,3 +24,9 @@ suites:
   - name: macbookpro
     provisioner:
       named_run_list: macbookpro
+  - name: omnibus
+    provisioner:
+      named_run_list: omnibus
+  - name: raspberrypi
+    provisioner:
+      named_run_list: raspberrypi
