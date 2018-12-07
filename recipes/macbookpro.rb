@@ -18,9 +18,7 @@
 #
 
 # Enable better power management
-%w{ macfanctld thermald tlp }.each do |pkg|
-  package pkg
-end
+package %w( macfanctld thermald tlp )
 
 %w{ macfanctld thermald tlp }.each do |srvc|
   service srvc do
@@ -47,13 +45,9 @@ execute 'tlp bat'
 # put the second hard drive to sleep, currently unused
 execute 'hdparm -Y /dev/sdb'
 
-# This machine has a busted USB interface, we'll remove the tools and modules
-packages = %w{ bluetooth bluez }
-
-packages.each do |pkg|
-  package pkg do
-    action :remove
-  end
+# This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
+package %w( modemmanager wpasupplicant ) do
+  action :remove
 end
 
 reboot 'blacklist' do
