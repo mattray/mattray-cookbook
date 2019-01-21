@@ -2,7 +2,7 @@
 # Cookbook Name:: MattRay
 # Recipe:: macbookpro
 #
-# Copyright 2017 Matt Ray
+# Copyright 2017-2019 Matt Ray
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,9 +41,6 @@ end
 
 # put in battery mode always
 execute 'tlp bat'
-
-# put the second hard drive to sleep, currently unused
-execute 'hdparm -Y /dev/sdb'
 
 # This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
 package %w( modemmanager wpasupplicant ) do
