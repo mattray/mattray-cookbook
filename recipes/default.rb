@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+apt_update
+
+# must have sudo
+package %w( emacs-nox sudo )
+
 # directory for kitchen/solo
 directory '/etc/chef/trusted_certs/' do
   recursive true
@@ -66,10 +71,6 @@ user 'debian' do
   action :remove
 end
 
-apt_update
-
 package %w( binutils-doc bluetooth bluez doc-debian exim4-base libssl-doc libx11-doc nfs-common samba-common ) do
   action :remove
 end
-
-package 'emacs-nox'
