@@ -5,7 +5,6 @@
 
 package %w(
   alsa-firmware
-  alsa-lib
   alsa-tools-firmware
   postfix
 ) do
