@@ -2,20 +2,6 @@
 # Cookbook Name:: MattRay
 # Recipe:: macbookpro
 #
-# Copyright 2017-2019 Matt Ray
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
 # Enable better power management
 package %w( macfanctld thermald tlp )
@@ -43,7 +29,10 @@ end
 execute 'tlp bat'
 
 # This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
-package %w( modemmanager wpasupplicant ) do
+package %w(
+  modemmanager
+  wpasupplicant
+) do
   action :remove
 end
 
@@ -52,7 +41,41 @@ reboot 'blacklist' do
 end
 
 # disable loading kernel modules
-modules = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core brcmsmac b43 mac80211 }
+modules = %w{
+  bnep
+  btusb
+  btrtl
+  btintel
+  bnep
+  btbcm
+  bcm5974
+  usbhid
+  uas
+  bluetooth
+  ehci_hcd
+  uhci_hcd
+  ehci_pci
+  usb_storage
+  usbcore
+  usbcommon
+  firewire_ohci
+  firewire_core
+  brcmsmac
+  b43
+  mac80211
+  joydev
+  snd_hda_intel
+  snd_hda_codec_cirrus
+  snd_hda_codec_generic
+  snd_hda_codec_hdmi
+  snd_hda_codec
+  snd_hwdep
+  snd_hda_core
+  snd_pcm
+  snd_timer
+  snd
+  soundcore
+}
 
 modules.each do |mod|
   file "/etc/modprobe.d/blacklist_#{mod}.conf" do
@@ -63,9 +86,7 @@ modules.each do |mod|
 end
 
 # disable unused kernel modules
-disable = %w{ bnep btusb btrtl btintel bnep btbcm bcm5974 usbhid uas bluetooth ehci_hcd uhci_hcd ehci_pci usb_storage usbcore usbcommon firewire_ohci firewire_core brcmsmac b43 mac80211 }
-
-disable.each do |dsbl|
+modules.each do |dsbl|
   execute "rmmod #{dsbl}" do
     ignore_failure true
     only_if "lsmod | grep #{dsbl}"

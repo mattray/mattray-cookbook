@@ -2,20 +2,6 @@
 # Cookbook Name:: MattRay
 # Recipe:: raspberrypi
 #
-# Copyright 2018 Matt Ray
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 
 user 'pi' do
   manage_home true
@@ -23,6 +9,51 @@ user 'pi' do
 end
 
 # We're not using bluetooth and other unused packages
-package %w( libraspberrypi-doc pi-bluetooth v4l-utils) do
+package %w(
+  libraspberrypi-doc
+  pi-bluetooth
+) do
   action :remove
+end
+
+reboot 'blacklist' do
+  action :nothing
+end
+
+# disable loading kernel modules
+# no sound or video on these devices
+modules = %w{
+  bcm2835_v4l2
+  snd
+  snd_bcm2835
+  snd_pcm
+  snd_timer
+  v4l2_common
+  videobuf2_vmalloc
+  bcm2835_codec
+  v4l2_mem2mem
+  bcm2835_mmal_vchiq
+  videobuf2_dma_contig
+  videobuf2_memops
+  videobuf2_v4l2
+  videobuf2_common
+  videodev
+  media
+  vc_sm_cma
+}
+
+modules.each do |mod|
+  file "/etc/modprobe.d/blacklist_#{mod}.conf" do
+    content "blacklist #{mod}"
+    mode '0644'
+    notifies :request_reboot, 'reboot[blacklist]'
+  end
+end
+
+# disable unused kernel modules
+modules.each do |dsbl|
+  execute "rmmod #{dsbl}" do
+    ignore_failure true
+    only_if "lsmod | grep #{dsbl}"
+  end
 end
