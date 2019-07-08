@@ -31,7 +31,6 @@ package %w(
   libssl-doc
   libx11-doc
   mysql-common
-  sysbench
   v4l-utils
 ) do
   action :remove
