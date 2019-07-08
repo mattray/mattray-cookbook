@@ -26,6 +26,8 @@ modules = %w{
   bcm2835_v4l2
   snd
   snd_bcm2835
+  snd_pcm_dmaengine
+  snd_soc_core
   snd_pcm
   snd_timer
   v4l2_common

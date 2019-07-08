@@ -13,6 +13,7 @@ file '/tmp/beaglebone-leds'
 
 package %w(
   bone101
+  dmidecode
   doc-beaglebone-getting-started
   mesa-common-dev
   modemmanager
