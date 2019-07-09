@@ -24,6 +24,7 @@ end
 # no sound or video on these devices
 modules = %w{
   bcm2835_v4l2
+  vc4
   snd
   snd_bcm2835
   snd_pcm_dmaengine
