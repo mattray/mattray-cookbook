@@ -3,102 +3,78 @@
 # Recipe:: macbookpro
 #
 
-# Enable better power management
-package %w( macfanctld thermald tlp )
+# Fans https://github.com/dgraziotin/mbpfan
+# CPU thermald? https://github.com/intel/thermal_daemon
+# Power TLP? disabled for now
 
-%w{ macfanctld thermald tlp }.each do |srvc|
+package %w( mbpfan )
+
+%w{ mbpfan }.each do |srvc|
   service srvc do
     action [:enable, :start]
   end
 end
 
-template '/etc/macfanctl.conf' do
-  source 'macfanctl.conf.erb'
-  notifies :restart, 'service[macfanctld]'
+# turn off the screen
+execute 'echo 0 > /sys/class/backlight/apple_backlight/brightness' do
+  not_if 'grep 0 /sys/class/backlight/apple_backlight/brightness'
 end
-
-# set CPU usage to powersave mode
-file '/etc/default/cpufrequtils' do
-  content 'GOVERNOR="powersave"'
-  mode '0644'
-  owner 'root'
-  group 'root'
-end
-
-# put in battery mode always
-execute 'tlp bat'
 
 # This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
 package %w(
   modemmanager
+  wireless-regdb
+  wireless-tools
   wpasupplicant
 ) do
   action :remove
 end
 
-reboot 'blacklist' do
-  action :nothing
-end
-
 # disable loading kernel modules
 modules = %w{
-  bnep
-  btusb
-  btrtl
-  btintel
-  bnep
-  btbcm
-  bcm5974
-  usbhid
-  uas
-  bluetooth
-  ehci_hcd
-  uhci_hcd
-  ehci_pci
-  usb_storage
-  usbcore
-  usbcommon
-  firewire_ohci
-  firewire_core
-  brcmsmac
   b43
-  mac80211
+  bcm5974
+  bluetooth
+  bnep
+  brcmsmac
+  btbcm
+  btintel
+  btrtl
+  btusb
+  drm
+  drm_kms_helper
+  ehci_hcd
+  ehci_hcd
+  ehci_pci
+  firewire_core
+  firewire_ohci
+  firewire_sbp2
   joydev
-  snd_hda_intel
+  mac80211
+  nouveau
+  snd
+  snd_hda_codec
   snd_hda_codec_cirrus
   snd_hda_codec_generic
   snd_hda_codec_hdmi
-  snd_hda_codec
-  snd_hwdep
   snd_hda_core
+  snd_hda_intel
+  snd_hwdep
   snd_pcm
   snd_timer
-  snd
   soundcore
+  uas
+  uhci_hcd
+  usb_storage
+  usbcommon
+  usbcore
+  usbhid
+  video
 }
 
 modules.each do |mod|
-  file "/etc/modprobe.d/blacklist_#{mod}.conf" do
-    content "blacklist #{mod}"
-    mode '0644'
-    notifies :request_reboot, 'reboot[blacklist]'
-  end
-end
-
-# disable unused kernel modules
-modules.each do |dsbl|
-  execute "rmmod #{dsbl}" do
+  kernel_module mod do
+    action :uninstall
     ignore_failure true
-    only_if "lsmod | grep #{dsbl}"
   end
-end
-
-# enable wakeonlan
-# systemctl suspend
-# call it with wakeonlan ma:cd:ad:re:ss
-cookbook_file '/etc/network/interfaces.d/enp2s0' do
-  source 'enp2s0'
-  mode '0644'
-  owner 'root'
-  group 'root'
 end
