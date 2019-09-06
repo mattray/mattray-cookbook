@@ -8,6 +8,7 @@ apt_update
 user 'debian' do
   manage_home true
   action :remove
+  ignore_failure true
 end
 
 # from Debian?
