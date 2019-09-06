@@ -6,18 +6,18 @@
 user 'pi' do
   manage_home true
   action :remove
+  ignore_failure true
 end
+
+# https://www.raspberrypi.org/documentation/configuration/config-txt/
 
 # We're not using bluetooth and other unused packages
 package %w(
+  dphys-swapfile
   libraspberrypi-doc
   pi-bluetooth
 ) do
   action :remove
-end
-
-reboot 'blacklist' do
-  action :nothing
 end
 
 # disable loading kernel modules
@@ -46,17 +46,18 @@ modules = %w{
 }
 
 modules.each do |mod|
-  file "/etc/modprobe.d/blacklist_#{mod}.conf" do
-    content "blacklist #{mod}"
-    mode '0644'
-    notifies :request_reboot, 'reboot[blacklist]'
+  kernel_module mod do
+    action :uninstall
+    ignore_failure true
   end
 end
 
-# disable unused kernel modules
-modules.each do |dsbl|
-  execute "rmmod #{dsbl}" do
-    ignore_failure true
-    only_if "lsmod | grep #{dsbl}"
-  end
+reboot 'reboot' do
+  action :nothing
+end
+
+append_if_no_line 'reduce gpu memory' do
+  path '/boot/config.txt'
+  line 'gpu_mem=16'
+  notifies :request_reboot, 'reboot[reboot]'
 end
