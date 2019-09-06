@@ -19,15 +19,21 @@ directory '/etc/chef/trusted_certs/' do
 end
 
 # self-signed cert for internal A2 testing
-cookbook_file '/etc/chef/trusted_certs/ndnd.crt' do
+cookbook_file '/etc/chef/trusted_certs/ndnd_bottlebru_sh.crt' do
   sensitive true
-  source 'ndnd.crt'
+  source 'ndnd_bottlebru_sh.crt'
   mode '0644'
 end
 
 append_if_no_line 'add ndnd to /etc/hosts' do
   path '/etc/hosts'
-  line '10.0.0.2        ndnd'
+  line '10.0.0.2        ndnd ndnd.bottlebru.sh'
+  line '10.0.0.4        cubert cubert.bottlebru.sh'
+end
+
+append_if_no_line 'set the PAGER for remote TRAMP sessions' do
+  path '/etc/bash.bashrc'
+  line 'export PAGER=cat'
 end
 
 user 'mattray' do
@@ -55,3 +61,5 @@ sudo 'mattray' do
   user 'mattray'
   nopasswd true
 end
+
+timezone 'Australia/Sydney'
