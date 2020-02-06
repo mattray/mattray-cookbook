@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: MattRay
+# Cookbook:: MattRay
 # Recipe:: macbookpro
 #
 
@@ -9,7 +9,7 @@
 
 package %w( mbpfan )
 
-%w{ mbpfan }.each do |srvc|
+%w( mbpfan ).each do |srvc|
   service srvc do
     action [:enable, :start]
   end
@@ -42,7 +42,7 @@ package %w(
 end
 
 # disable loading kernel modules
-modules = %w{
+modules = %w(
   b43
   bcm5974
   bluetooth
@@ -81,7 +81,7 @@ modules = %w{
   usbcore
   usbhid
   video
-}
+)
 
 modules.each do |mod|
   kernel_module mod do

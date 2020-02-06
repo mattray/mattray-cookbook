@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: MattRay
+# Cookbook:: MattRay
 # Recipe:: raspberrypi
 #
 
@@ -22,7 +22,7 @@ end
 
 # disable loading kernel modules
 # no sound or video on these devices
-modules = %w{
+modules = %w(
   bcm2835_v4l2
   vc4
   snd
@@ -43,7 +43,7 @@ modules = %w{
   videodev
   media
   vc_sm_cma
-}
+)
 
 modules.each do |mod|
   kernel_module mod do
@@ -63,6 +63,6 @@ append_if_no_line 'reduce gpu memory' do
 end
 
 # no swap
-sysctl_param 'vm.swappiness' do
+sysctl 'vm.swappiness' do
   value 0
 end

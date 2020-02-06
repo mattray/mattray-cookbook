@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: MattRay
+# Cookbook:: MattRay
 # Recipe:: default
 #
 

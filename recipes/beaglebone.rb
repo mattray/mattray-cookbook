@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: MattRay
+# Cookbook:: MattRay
 # Recipe:: beaglebone
 #
 
@@ -48,6 +48,6 @@ package %w(
 end
 
 # no swap
-sysctl_param 'vm.swappiness' do
+sysctl 'vm.swappiness' do
   value 0
 end
