@@ -28,6 +28,7 @@ package %w(
   bluetooth
   bluez
   exim4-base
+  exim4-config
   javascript-common
   libssl-doc
   libx11-doc
