@@ -20,6 +20,17 @@ execute 'echo 0 > /sys/class/backlight/apple_backlight/brightness' do
   not_if 'grep 0 /sys/class/backlight/apple_backlight/brightness'
 end
 
+replace_or_add 'disable lid closing suspend' do
+  path '/etc/systemd/logind.conf'
+  pattern '#HandleLidSwitch=suspend'
+  line 'HandleLidSwitch=ignore'
+end
+
+service 'systemd-logind' do
+  subscribes :restart, 'service[systemd-logind]', :immediately
+  action :nothing
+end
+
 # This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
 package %w(
   modemmanager
