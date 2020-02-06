@@ -61,3 +61,8 @@ append_if_no_line 'reduce gpu memory' do
   line 'gpu_mem=16'
   notifies :request_reboot, 'reboot[reboot]'
 end
+
+# no swap
+sysctl_param 'vm.swappiness' do
+  value 0
+end

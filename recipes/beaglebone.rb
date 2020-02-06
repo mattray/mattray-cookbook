@@ -46,3 +46,8 @@ package %w(
 ) do
   action :remove
 end
+
+# no swap
+sysctl_param 'vm.swappiness' do
+  value 0
+end
