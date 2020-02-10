@@ -27,12 +27,15 @@ package %w(
   binutils-doc
   bluetooth
   bluez
+  chrony
   exim4-base
   exim4-config
   javascript-common
   libssl-doc
   libx11-doc
   mysql-common
+  ntp
+  sntp
   v4l-utils
 ) do
   action :remove
