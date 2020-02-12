@@ -11,6 +11,8 @@ user 'debian' do
   ignore_failure true
 end
 
+package 'htop'
+
 # from Debian?
 package %w(
   doc-debian
