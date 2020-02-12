@@ -3,7 +3,7 @@ maintainer       'Matt Ray'
 maintainer_email 'matthewhray@gmail.com'
 license          'Apache-2.0'
 description      'Configures Matt Ray\'s assorted machines'
-version          '0.19.0'
+version          '0.20.0'
 
 chef_version '>= 15'
 
