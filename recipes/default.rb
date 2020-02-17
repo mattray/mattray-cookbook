@@ -21,16 +21,16 @@ unless platform_family?('windows')
   end
 
   # self-signed cert for internal A2 testing
-  cookbook_file '/etc/chef/trusted_certs/ndnd_bottlebru_sh.crt' do
+  cookbook_file '/etc/chef/trusted_certs/inez_bottlebru_sh.crt' do
     sensitive true
-    source 'ndnd_bottlebru_sh.crt'
+    source 'inez_bottlebru_sh.crt'
     mode '0644'
   end
 
-  append_if_no_line 'add ndnd to /etc/hosts' do
+  append_if_no_line 'add ndnd & inez to /etc/hosts' do
     path '/etc/hosts'
     line '10.0.0.2        ndnd ndnd.bottlebru.sh'
-    line '10.0.0.4        cubert cubert.bottlebru.sh'
+    line '10.0.0.10       inez inez.bottlebru.sh'
   end
 
   append_if_no_line 'set the PAGER for remote TRAMP sessions' do
