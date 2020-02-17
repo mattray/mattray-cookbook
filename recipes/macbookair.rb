@@ -78,6 +78,7 @@ modules = %w(
   snd_timer
   soundcore
   thunderbolt
+  vfat
 )
 
 modules.each do |mod|
