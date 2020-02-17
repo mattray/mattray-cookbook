@@ -50,6 +50,7 @@ modules = %w(
   brcmsmac
   btbcm
   btintel
+  btrfs
   btrtl
   btusb
   drm
@@ -60,9 +61,15 @@ modules = %w(
   firewire_core
   firewire_ohci
   firewire_sbp2
+  jfs
   joydev
   mac80211
+  msdos
   nouveau
+  pcmcia
+  pcmcia_core
+  qnx4
+  raid6_pq
   snd
   snd_hda_codec
   snd_hda_codec_cirrus
@@ -74,13 +81,18 @@ modules = %w(
   snd_pcm
   snd_timer
   soundcore
+  ssb
   uas
+  ufs
   uhci_hcd
+  usb_common
   usb_storage
   usbcommon
   usbcore
   usbhid
+  vfat
   video
+  xfs
 )
 
 modules.each do |mod|
