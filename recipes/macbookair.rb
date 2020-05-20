@@ -7,7 +7,7 @@
 directory '/storage'
 
 mount '/storage' do
-  device '/dev/sdb'
+  device '/dev/sda'
   fstype 'ext4'
   options 'rw'
   action [:mount, :enable]
@@ -78,7 +78,6 @@ modules = %w(
   snd_timer
   soundcore
   thunderbolt
-  vfat
 )
 
 modules.each do |mod|

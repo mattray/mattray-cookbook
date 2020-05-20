@@ -11,7 +11,7 @@ user 'debian' do
   ignore_failure true
 end
 
-package 'htop'
+package %w( emacs-nox sudo htop)
 
 # from Debian?
 package %w(
@@ -19,26 +19,6 @@ package %w(
   nfs-common
   samba-common
   telnet
-) do
-  action :remove
-end
-
-# from Raspbian?
-package %w(
-  alsa-utils
-  binutils-doc
-  bluetooth
-  bluez
-  chrony
-  exim4-base
-  exim4-config
-  javascript-common
-  libssl-doc
-  libx11-doc
-  mysql-common
-  ntp
-  sntp
-  v4l-utils
 ) do
   action :remove
 end

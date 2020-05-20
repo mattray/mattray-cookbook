@@ -3,23 +3,6 @@
 # Recipe:: raspberrypi
 #
 
-user 'pi' do
-  manage_home true
-  action :remove
-  ignore_failure true
-end
-
-# https://www.raspberrypi.org/documentation/configuration/config-txt/
-
-# We're not using bluetooth and other unused packages
-package %w(
-  dphys-swapfile
-  libraspberrypi-doc
-  pi-bluetooth
-) do
-  action :remove
-end
-
 # disable loading kernel modules
 # no sound or video on these devices
 modules = %w(
@@ -43,6 +26,11 @@ modules = %w(
   videodev
   media
   vc_sm_cma
+  v3d
+  gpu_sched
+  drm
+  drm_panel_orientation_quirks
+  rpivid_mem
 )
 
 modules.each do |mod|
@@ -56,13 +44,9 @@ reboot 'reboot' do
   action :nothing
 end
 
+# https://www.raspberrypi.org/documentation/configuration/config-txt/
 append_if_no_line 'reduce gpu memory' do
   path '/boot/config.txt'
   line 'gpu_mem=16'
   notifies :request_reboot, 'reboot[reboot]'
-end
-
-# no swap
-sysctl 'vm.swappiness' do
-  value 0
 end

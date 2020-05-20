@@ -6,8 +6,9 @@ Much more about the builds and installations on [mattray.github.io](https://matt
 
 ### Platforms
 
-- Beaglebone Black, 32-bit ARM on Debian 10 - runs apt-cacher-ng
-- MacBook Pro 6,2, Intel Core i5 M540 2.53GHz on Debian 10 - runs Chef Automate
+- Beaglebone Black, 32-bit ARM on Debian 10
+- MacBook Pro 6,2, Intel Core i5 M540 2.53GHz on Debian 10 - runs Chef Infra Server
+- MacBook Air 7,2, Intel Core i5-5250U 1.60GHz on Debian 10 - runs Chef Automate
 - Raspberry Pi 4 B, 32-bit ARM on Raspbian 10
 - Raspberry Pi 3 B+, 32-bit ARM on CentOS 7
 - Raspberry Pi 3 B+, 32-bit ARM on Raspbian 10
@@ -16,4 +17,4 @@ Much more about the builds and installations on [mattray.github.io](https://matt
 
 ### Chef
 
-- Chef 15
+- Chef 16

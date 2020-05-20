@@ -9,42 +9,28 @@ provisioner:
   always_update_cookbooks: true
   chef_license: accept
   product_name: chef
-  product_version: 15
+  product_version: 16
 
 verifier:
   name: inspec
 
 platforms:
-  - name: debian-9
+  - name: debian-10
   - name: centos-7
 
 suites:
-  - name: 14default
-    provisioner:
-      product_version: 14
-  - name: 15default
-  - name: 14beaglebone
-    provisioner:
-      named_run_list: beaglebone
-      product_version: 14
-    excludes: ['centos-7']
-  - name: 15beaglebone
+  - name: beaglebone
     provisioner:
       named_run_list: beaglebone
     excludes: ['centos-7']
-  - name: 14macbookpro
-    provisioner:
-      named_run_list: macbookpro
-      product_version: 14
-    excludes: ['centos-7']
-  - name: 15macbookpro
+  - name: macbookpro
     provisioner:
       named_run_list: macbookpro
     excludes: ['centos-7']
-  - name: 14raspberrypi
+  - name: macbookair
     provisioner:
-      named_run_list: raspberrypi
-      product_version: 14
-  - name: 15raspberrypi
+      named_run_list: macbookair
+    excludes: ['centos-7']
+  - name: raspberrypi
     provisioner:
       named_run_list: raspberrypi

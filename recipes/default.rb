@@ -3,16 +3,15 @@
 # Recipe:: default
 #
 
-if platform_family?('debian')
+if debian_platform?
   include_recipe('mattray::_debian')
-elsif platform_family?('rhel')
+elsif raspbian_platform?
+  include_recipe('mattray::_raspbian')
+elsif redhat_based?('rhel')
   include_recipe('mattray::_rhel')
 end
 
 unless platform_family?('windows')
-
-  # must have sudo
-  package %w( emacs-nox sudo )
 
   # directory for kitchen/solo
   directory '/etc/chef/trusted_certs/' do
@@ -69,6 +68,11 @@ unless platform_family?('windows')
   sudo 'mattray' do
     user 'mattray'
     nopasswd true
+  end
+
+  # this works for Chef and Cinc
+  chef_client_systemd_timer 'Run Chef Infra Client as a systemd timer' do
+    chef_binary_path '/usr/bin/chef-client'
   end
 
 end
