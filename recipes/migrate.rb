@@ -8,41 +8,41 @@ cookbook_file '/etc/chef/chef_managed_org-validator.pem' do
 end
 
 # chef_server_url "https://ndnd.bottlebru.sh/organizations/chef_managed_org"
-replace_or_add "chef_server_url" do
-  path "/etc/chef/client.rb"
-  pattern "chef_server_url*"
+replace_or_add 'chef_server_url' do
+  path '/etc/chef/client.rb'
+  pattern 'chef_server_url*'
   line 'chef_server_url "https://ndnd.bottlebru.sh/organizations/chef_managed_org"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
 # validation_key "/etc/chef/chef_managed_org-validator.pem"
-replace_or_add "validation_key" do
-  path "/etc/chef/client.rb"
-  pattern "validation_key*"
+replace_or_add 'validation_key' do
+  path '/etc/chef/client.rb'
+  pattern 'validation_key*'
   line 'validation_key "/etc/chef/chef_managed_org-validator.pem"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
 # delete validation_client_name "chef_managed_org"
-replace_or_add "validation_key_name" do
-  path "/etc/chef/client.rb"
+replace_or_add 'validation_key_name' do
+  path '/etc/chef/client.rb'
   pattern 'validation_client_name "matt-validator"'
   line '# validation_client_name "matt-validator"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
 # policy_group "ndnd-home"
-replace_or_add "policy_group" do
-  path "/etc/chef/client.rb"
-  pattern "policy_group*"
+replace_or_add 'policy_group' do
+  path '/etc/chef/client.rb'
+  pattern 'policy_group*'
   line 'policy_group "ndnd-home"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
 # policy_name "raspbian"
-replace_or_add "policy_group" do
-  path "/etc/chef/client.rb"
-  pattern "policy_name*"
+replace_or_add 'policy_group' do
+  path '/etc/chef/client.rb'
+  pattern 'policy_name*'
   line 'policy_name "' + node['policy_name'] + '"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
