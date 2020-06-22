@@ -13,14 +13,6 @@ mount '/emmc' do
   action [:mount, :enable]
 end
 
-# execute 'turn off the blinking network light' do
-#   command 'echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger'
-#   not_if { ::File.exist?('/tmp/beaglebone-leds') }
-#   ignore_failure true
-# end
-
-# file '/tmp/beaglebone-leds'
-
 package %w(
   ardupilot-copter-3.6-bbbmini
   ardupilot-copter-3.6-blue
@@ -37,7 +29,6 @@ package %w(
   mjpg-streamer
   modemmanager
   rfkill
-  vim
   vpdma-dra7xx-installer
   wireguard-tools
   wireless-tools
