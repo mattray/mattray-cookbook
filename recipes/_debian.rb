@@ -11,14 +11,17 @@ user 'debian' do
   ignore_failure true
 end
 
-package %w( emacs-nox sudo htop)
+package %w( emacs-nox htop rsync sudo )
 
 # from Debian?
 package %w(
-  doc-debian
-  nfs-common
-  samba-common
-  telnet
+  bluetooth
+  bluez
+  exim4-base
+  exim4-config
+  exim4-daemon-light
+  mysql-common
+  nano
 ) do
   action :remove
 end
