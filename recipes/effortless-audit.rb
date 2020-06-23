@@ -10,9 +10,10 @@ hab_sup 'default' do
 end
 
 hab_service 'mattray/effortless-ndnd-home' do
-  update_condition 'track-channel'
-  topology 'standalone'
   channel 'unstable'
+  strategy 'at-once'
+  topology 'standalone'
+  update_condition 'track-channel'
 end
 
 hab_config 'effortless-ndnd-home.default' do
