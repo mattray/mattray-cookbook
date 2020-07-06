@@ -3,12 +3,13 @@ maintainer       'Matt Ray'
 maintainer_email 'chef@mattray.dev'
 license          'Apache-2.0'
 description      'Configures Matt Ray\'s assorted machines'
-version          '0.23.0'
+version          '0.24.0'
 
 chef_version '>= 16'
 
 supports 'debian', '~> 10.0'
 supports 'centos', '~> 7.0'
+supports 'macos', '~> 10.14'
 
 depends 'line', '~> 2.9'
 depends 'habitat', '~> 2.2'
