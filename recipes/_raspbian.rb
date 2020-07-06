@@ -3,6 +3,12 @@
 # Recipe:: _raspbian
 #
 
+# for apt-cacher-ng
+append_if_no_line 'add cubert to /etc/hosts' do
+  path '/etc/hosts'
+  line '10.0.0.4        cubert cubert.bottlebru.sh'
+end
+
 apt_update
 
 user 'pi' do
@@ -29,6 +35,7 @@ package %w(
   libx11-doc
   mysql-common
   nfs-common
+  ntp
   pi-bluetooth
   samba-common
   telnet
