@@ -1,0 +1,4 @@
+---
+resources:
+  - type: "log"
+    name: "managing MacOS"
