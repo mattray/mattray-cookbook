@@ -10,6 +10,7 @@ modules = %w(
   vc4
   snd
   snd_bcm2835
+  snd_compress
   snd_pcm_dmaengine
   snd_soc_core
   snd_pcm
@@ -17,6 +18,8 @@ modules = %w(
   v4l2_common
   videobuf2_vmalloc
   bcm2835_codec
+  bcm2835_isp
+  bcm2835_v4l2
   v4l2_mem2mem
   bcm2835_mmal_vchiq
   videobuf2_dma_contig
