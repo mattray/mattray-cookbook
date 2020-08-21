@@ -42,7 +42,7 @@ unless platform_family?('windows')
 
   append_if_no_line 'add roberto to /etc/hosts' do
     path '/etc/hosts'
-    line '10.0.0.10        roberto roberto.bottlebru.sh'
+    line '10.0.0.10       roberto roberto.bottlebru.sh'
   end
 
   unless macos_platform?
