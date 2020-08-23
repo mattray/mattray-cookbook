@@ -79,9 +79,7 @@ unless platform_family?('windows')
     end
 
     # this works for Chef and Cinc
-    chef_client_systemd_timer 'Run Chef Infra Client as a systemd timer' do
-      chef_binary_path '/usr/bin/chef-client'
-    end
+    chef_client_systemd_timer 'Run Chef Infra Client as a systemd timer'
   end
 
 end
