@@ -4,13 +4,13 @@
 #
 
 if debian_platform?
-  include_recipe('mattray::_debian')
+  include_recipe 'mattray::_debian'
 elsif raspbian_platform?
-  include_recipe('mattray::_raspbian')
+  include_recipe 'mattray::_raspbian'
 elsif redhat_based?('rhel')
-  include_recipe('mattray::_rhel')
+  include_recipe 'mattray::_rhel'
 elsif macos_platform?
-  include_recipe('mattray::macos')
+  include_recipe 'mattray::macos'
 end
 
 unless platform_family?('windows')

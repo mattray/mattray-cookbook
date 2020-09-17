@@ -9,7 +9,7 @@ chef_version '>= 16'
 
 supports 'debian', '~> 10.0'
 supports 'centos', '~> 7.0'
-supports 'macos', '~> 10.14'
+supports 'mac_os_x', '~> 10.14'
 
 depends 'line', '~> 2.9'
 
