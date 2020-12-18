@@ -53,3 +53,8 @@ append_if_no_line 'reduce gpu memory' do
   line 'gpu_mem=16'
   notifies :request_reboot, 'reboot[reboot]'
 end
+
+# https://raspberrypi.stackexchange.com/questions/52066/pi3-wifi-extremely-slow
+execute 'iwconfig wlan0 power off' do
+  not_if 'iwconfig wlan0 | grep "Power Management:off"'
+end
