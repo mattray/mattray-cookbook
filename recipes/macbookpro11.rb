@@ -7,12 +7,12 @@
 # mount the SD Card as an extra filesystem
 directory '/storage'
 
-mount '/storage' do
-  device '/dev/sdb'
-  fstype 'ext4'
-  options 'rw'
-  action [:mount, :enable]
-end
+# mount '/storage' do
+#   device '/dev/sdb'
+#   fstype 'ext4'
+#   options 'rw'
+#   action [:mount, :enable]
+# end
 
 # Fans https://github.com/dgraziotin/mbpfan
 
