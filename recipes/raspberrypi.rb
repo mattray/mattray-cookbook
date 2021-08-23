@@ -3,6 +3,9 @@
 # Recipe:: raspberrypi
 #
 
+# this is for Raspberry Pi OS machines
+
+
 # disable loading kernel modules
 # no sound or video on these devices
 modules = %w(
@@ -47,7 +50,7 @@ reboot 'reboot' do
   action :nothing
 end
 
-# https://www.raspberrypi.org/documentation/configuration/config-txt/
+# https://www.raspberrypi.org/documentation/configuration/config-append/
 append_if_no_line 'reduce gpu memory' do
   path '/boot/config.txt'
   line 'gpu_mem=16'
@@ -56,5 +59,6 @@ end
 
 # https://raspberrypi.stackexchange.com/questions/52066/pi3-wifi-extremely-slow
 execute 'iwconfig wlan0 power off' do
+  only_if { ::File.exist?('/sbin/iwconfig') }
   not_if 'iwconfig wlan0 | grep "Power Management:off"'
 end
