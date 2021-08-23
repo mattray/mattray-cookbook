@@ -17,7 +17,7 @@ user 'pi' do
   ignore_failure true
 end
 
-package %w( emacs-nox sudo htop)
+package %w( emacs-nox htop rsync sudo zsh)
 
 # We're not using bluetooth and other unused packages
 package %w(
