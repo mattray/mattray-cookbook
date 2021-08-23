@@ -1,9 +1,9 @@
-# one-time migration from Hosted Chef to on-premises Chef Server
+# one-time migration from ndnd to Hosted Chef
 
 # validator pem for ndnd
-cookbook_file '/etc/chef/chef_managed_org-validator.pem' do
+cookbook_file '/etc/chef/matt-validator.pem' do
   sensitive true
-  source 'chef_managed_org-validator.pem'
+  source 'matt-validator.pem'
   mode '0644'
 end
 
@@ -11,7 +11,7 @@ end
 replace_or_add 'chef_server_url' do
   path '/etc/chef/client.rb'
   pattern 'chef_server_url*'
-  line 'chef_server_url "https://ndnd.bottlebru.sh/organizations/chef_managed_org"'
+  line 'chef_server_url "https://api.chef.io/organizations/matt"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
@@ -19,15 +19,15 @@ end
 replace_or_add 'validation_key' do
   path '/etc/chef/client.rb'
   pattern 'validation_key*'
-  line 'validation_key "/etc/chef/chef_managed_org-validator.pem"'
+  line 'validation_key "/etc/chef/matt-validator.pem"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
 # delete validation_client_name "chef_managed_org"
 replace_or_add 'validation_key_name' do
   path '/etc/chef/client.rb'
-  pattern 'validation_client_name "matt-validator"'
-  line '# validation_client_name "matt-validator"'
+  pattern '#validation_client_name "matt-validator"'
+  line 'validation_client_name "matt-validator"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
@@ -35,7 +35,7 @@ end
 replace_or_add 'policy_group' do
   path '/etc/chef/client.rb'
   pattern 'policy_group*'
-  line 'policy_group "ndnd-home"'
+  line 'policy_group "home"'
   not_if { ::File.exist?('/etc/chef/client.pem.old') }
 end
 
