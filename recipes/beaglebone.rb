@@ -14,6 +14,9 @@ mount '/emmc' do
 end
 
 package %w(
+  alsa-topology-conf
+  alsa-ucm-conf
+  alsa-utils
   ardupilot-copter-3.6-bbbmini
   ardupilot-copter-3.6-blue
   ardupilot-copter-3.6-pocket
@@ -23,14 +26,29 @@ package %w(
   bb-beaglebone-io-installer
   bb-johnny-five-installer
   bb-node-red-installer
+  bb-usb-gadgets
+  bone101
+  bonescript
+  c9-core-installer
   dmidecode
   doc-beaglebone-getting-started
+  firmware-atheros
+  firmware-brcm80211
+  firmware-iwlwifi
+  firmware-libertas
+  firmware-misc-nonfree
+  firmware-realtek
+  firmware-ti-connectivity
+  firmware-zd1211
   mesa-common-dev
   mjpg-streamer
   modemmanager
+  nginx
+  nginx-full
   rfkill
   vpdma-dra7xx-installer
   wireguard-tools
+  wireless-regdb
   wireless-tools
   wpasupplicant
   xorg-sgml-doctools
@@ -38,7 +56,10 @@ package %w(
   action :remove
 end
 
-# no swap
+# dphys-swapfile turning it back on because builds starve out for memory
+package %w( dphys-swapfile )
+
+# low swap
 sysctl 'vm.swappiness' do
-  value 0
+  value 1
 end
