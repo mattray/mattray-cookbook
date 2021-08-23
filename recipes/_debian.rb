@@ -11,26 +11,35 @@ end
 
 apt_update
 
-user 'debian' do
-  manage_home true
-  action :remove
-  ignore_failure true
-end
+# preferred extra packages
+package %w( curl emacs-nox htop rsync sudo zsh )
 
-package %w( emacs-nox htop rsync sudo )
-
-# from Debian?
+# Debian 11 is really minimal!
 package %w(
-  bluetooth
-  bluez
-  chrony
-  exim4-base
-  exim4-config
-  exim4-daemon-light
-  mysql-common
-  ntp
-  ntpdate
   nano
 ) do
   action :remove
+end
+
+# disable loading kernel modules
+# no bluetooth on these devices
+modules = %w(
+  hci_uart
+  btrtl
+  btintel
+  btqca
+  btbcm
+  bluetooth
+  joydev
+)
+
+modules.each do |mod|
+  kernel_module mod do
+    action :uninstall
+    ignore_failure true
+  end
+end
+
+reboot 'reboot' do
+  action :nothing
 end
