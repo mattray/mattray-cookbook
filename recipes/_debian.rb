@@ -12,21 +12,21 @@ end
 apt_repository 'deb.debian.org' do
   uri          'http://deb.debian.org/debian'
   distribution 'bullseye'
-  components   ['main', 'contrib', 'non-free']
+  components   %w(main contrib non-free)
   deb_src      false
 end
 
 apt_repository 'deb.debian.org-updates' do
   uri          'http://deb.debian.org/debian'
   distribution 'bullseye-updates'
-  components   ['main', 'contrib', 'non-free']
+  components   %w(main contrib non-free)
   deb_src      false
 end
 
 apt_repository 'security.debian.org' do
   uri          'http://security.debian.org/debian-security'
   distribution 'bullseye-security'
-  components   ['main', 'contrib', 'non-free']
+  components   %w(main contrib non-free)
   deb_src      false
 end
 

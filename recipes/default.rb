@@ -63,7 +63,7 @@ unless platform_family?('windows')
 
     # this works for Chef and Cinc
     chef_client_systemd_timer 'Run Cinc Client as a systemd timer' do
-      environment ({'HOME' => '/etc/cinc'})
+      environment({ 'HOME' => '/etc/cinc' })
       interval '2hr'
     end
   end
