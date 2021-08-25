@@ -6,15 +6,24 @@ Much more about the builds and installations on [mattray.github.io](https://matt
 
 ### Platforms
 
-- Beaglebone Black, 32-bit ARM on Debian 10
-- MacBook Pro 6,2, Intel Core i5 M540 2.53GHz on Debian 10 - runs Chef Infra Server
-- MacBook Pro 11,1, Intel Core i7-4558U 2.80GHz on Debian 10 - runs Chef Automate
-- Raspberry Pi 4 B, 32-bit ARM on Raspbian 10
-- Raspberry Pi 3 B+, 32-bit ARM on CentOS 7
-- Raspberry Pi 3 B+, 32-bit ARM on Raspbian 10
-- Raspberry Pi Zero W, 32-bit ARM on Raspbian 10
-- Shuttle SH55J, Intel i7 @ 2.93GHz on Debian 10
+- AMD workstation on Arch
+- Beaglebone Black, 32-bit Arm on Debian 11 - apt-cacher-ng, Cinc builds
+- MacBook Pro 6,2, Intel Core i5 M540 2.53GHz on Debian 11 - currently unused
+- Raspberry Pi Zero W, 32-bit Arm on Raspbian 10 - FlightAware
+- Raspberry Pi Zero W, 32-bit Arm on Debian 11 - Cinc builds
+- Raspberry Pi 3 B+, 64-bit Arm on Debian 11 - K8s cluster
+- Raspberry Pi 3 B+, 64-bit Arm on Debian 11 - K8s cluster
+- Raspberry Pi 4 2 gigs RAM, 64-bit Arm on Debian 11 - K8s cluster
+- Raspberry Pi 4 8 gigs RAM, 64-bit Arm on Debian 11 - K8s cluster
+- RockPro64, 64-bit Arm on Debian 11
+- Shuttle SH55J, Intel i7 @ 2.93GHz - currently unused
 
-### Chef
+### Cinc
 
-- Chef 16
+- Cinc 17
+
+### Recipes and Tags
+
+The `default` recipe looks for tags to select on hardware recipes (ie. `raspberry_pi`) as necessary.
+
+Raspberry Pi devices running Debian 11 are tagged `rpi` to select the proper configuration.

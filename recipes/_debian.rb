@@ -9,13 +9,48 @@ append_if_no_line 'add cubert to /etc/hosts' do
   line '10.0.0.4        cubert cubert.bottlebru.sh'
 end
 
+apt_repository 'deb.debian.org' do
+  uri          'http://deb.debian.org/debian'
+  distribution 'bullseye'
+  components   ['main', 'contrib', 'non-free']
+  deb_src      false
+end
+
+apt_repository 'deb.debian.org-updates' do
+  uri          'http://deb.debian.org/debian'
+  distribution 'bullseye-updates'
+  components   ['main', 'contrib', 'non-free']
+  deb_src      false
+end
+
+apt_repository 'security.debian.org' do
+  uri          'http://security.debian.org/debian-security'
+  distribution 'bullseye-security'
+  components   ['main', 'contrib', 'non-free']
+  deb_src      false
+end
+
+file '/etc/apt/sources.list' do
+  action :delete
+end
+
 apt_update
 
 # preferred extra packages
-package %w( curl emacs-nox htop rsync sudo zsh )
+package %w(
+  curl
+  emacs-nox
+  htop
+  rsync
+  sudo
+  zsh
+)
 
 # Debian 11 is really minimal!
 package %w(
+  exim4-base
+  exim4-config
+  exim4-daemon-light
   nano
 ) do
   action :remove
@@ -29,6 +64,7 @@ modules = %w(
   btintel
   btqca
   btbcm
+  btsdio
   bluetooth
   joydev
 )

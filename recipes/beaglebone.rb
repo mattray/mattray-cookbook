@@ -3,6 +3,15 @@
 # Recipe:: beaglebone
 #
 
+# deb [arch=armhf] http://repos.rcn-ee.com/debian/ bullseye main
+apt_repository 'repos.rcn-ee.com' do
+  uri          'http://repos.rcn-ee.com/debian'
+  distribution 'bullseye'
+  components   ['main']
+  arch         'armhf'
+  deb_src      false
+end
+
 # mount the eMMC as an extra filesystem
 directory '/emmc'
 
@@ -14,44 +23,16 @@ mount '/emmc' do
 end
 
 package %w(
-  alsa-topology-conf
-  alsa-ucm-conf
-  alsa-utils
-  ardupilot-copter-3.6-bbbmini
-  ardupilot-copter-3.6-blue
-  ardupilot-copter-3.6-pocket
-  ardupilot-rover-3.4-bbbmini
-  ardupilot-rover-3.4-blue
-  ardupilot-rover-3.4-pocket
-  bb-beaglebone-io-installer
-  bb-johnny-five-installer
-  bb-node-red-installer
-  bb-usb-gadgets
   bone101
-  bonescript
-  c9-core-installer
+  crda
   dmidecode
-  doc-beaglebone-getting-started
-  firmware-atheros
-  firmware-brcm80211
-  firmware-iwlwifi
-  firmware-libertas
-  firmware-misc-nonfree
-  firmware-realtek
-  firmware-ti-connectivity
-  firmware-zd1211
-  mesa-common-dev
-  mjpg-streamer
-  modemmanager
+  iw
   nginx
-  nginx-full
-  rfkill
-  vpdma-dra7xx-installer
-  wireguard-tools
+  nginx-common
+  nginx-core
+  nodejs-doc
   wireless-regdb
-  wireless-tools
   wpasupplicant
-  xorg-sgml-doctools
 ) do
   action :remove
 end

@@ -12,7 +12,19 @@ elsif arch_platform?
 elsif redhat_based?('rhel')
   include_recipe 'mattray::_rhel'
 elsif macos_platform?
-  include_recipe 'mattray::macos'
+  include_recipe 'mattray::_macos'
+end
+
+if tagged?('beaglebone')
+  include_recipe 'mattray::beaglebone'
+end
+
+if tagged?('cluster')
+  include_recipe 'mattray::cluster'
+end
+
+if tagged?('rpi')
+  include_recipe 'mattray::raspberry_pi'
 end
 
 unless platform_family?('windows')
@@ -52,6 +64,7 @@ unless platform_family?('windows')
     # this works for Chef and Cinc
     chef_client_systemd_timer 'Run Cinc Client as a systemd timer' do
       environment ({'HOME' => '/etc/cinc'})
+      interval '2hr'
     end
   end
 
