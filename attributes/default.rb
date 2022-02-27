@@ -6,3 +6,5 @@ default['mattray']['macfanctl']['TC0P_ceiling'] = 67
 default['mattray']['macfanctl']['TG0P_floor'] = 57
 default['mattray']['macfanctl']['TG0P_ceiling'] = 67
 default['mattray']['macfanctl']['log_level'] = 0
+
+default['mattray']['cinc']['version'] = '17.9.52'
