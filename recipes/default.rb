@@ -23,6 +23,14 @@ if tagged?('cluster')
   include_recipe 'mattray::cluster'
 end
 
+if tagged?('macbookair')
+  include_recipe 'mattray::macbookair'
+end
+
+if tagged?('macbookpro62')
+  include_recipe 'mattray::macbookpro62'
+end
+
 if tagged?('rpi')
   include_recipe 'mattray::raspberry_pi'
 end
@@ -40,6 +48,16 @@ unless platform_family?('windows')
       manage_home true
       shell '/usr/bin/zsh'
       password '$1$nzR3m/Xd$jJ3XxhiFZwuIxJXgqmUXF1'
+    end
+
+    append_if_no_line 'clean up zsh for remote TRAMP sessions' do
+      path '/home/mattray/.zshrc'
+      line "[[ $TERM == \"dumb\" ]] && unsetopt zle && PS1='$ '"
+    end
+
+    append_if_no_line 'I am ROOT' do
+      path '/root/.zshrc'
+      line 'export PS1=ROOT:$PS1'
     end
 
     directory '/home/mattray/.ssh' do
@@ -66,6 +84,12 @@ unless platform_family?('windows')
       environment({ 'HOME' => '/etc/cinc' })
       interval '2hr'
     end
+
+    # enable USB serial console
+    service 'getty@ttyUSB0.service' do
+      action [ :enable, :start ]
+    end
+
   end
 
 end
