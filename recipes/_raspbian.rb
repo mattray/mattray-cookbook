@@ -62,17 +62,11 @@ modules = %w(
   snd_pcm
   snd_timer
   v4l2_common
-  videobuf2_vmalloc
   bcm2835_codec
   bcm2835_isp
   bcm2835_v4l2
   v4l2_mem2mem
   bcm2835_mmal_vchiq
-  videobuf2_dma_contig
-  videobuf2_memops
-  videobuf2_v4l2
-  videobuf2_common
-  videodev
   media
   vc_sm_cma
   v3d
