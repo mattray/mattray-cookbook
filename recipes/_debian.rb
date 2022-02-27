@@ -43,6 +43,7 @@ package %w(
   htop
   rsync
   sudo
+  usbutils
   zsh
 )
 
