@@ -1,6 +1,7 @@
 #
 # Cookbook:: MattRay
 # Recipe:: macbookpro
+# DMI: Apple Inc. MacBookPro6,2/Mac-F22586C8, BIOS    MBP61.88Z.0057.B17.1702241225 02/24/17
 #
 
 # Fans https://github.com/dgraziotin/mbpfan
@@ -16,8 +17,10 @@ package %w( mbpfan )
 end
 
 # turn off the screen
-execute 'echo 0 > /sys/class/backlight/apple_backlight/brightness' do
-  not_if 'grep 0 /sys/class/backlight/apple_backlight/brightness'
+#/sys/class/backlight/gmux_backlight/brightness
+execute 'echo 0 > /sys/class/backlight/gmux_backlight/brightness' do
+  not_if 'grep ^0 /sys/class/backlight/gmux_backlight/brightness'
+  ignore_failure true
 end
 
 replace_or_add 'disable lid closing suspend' do
@@ -33,7 +36,9 @@ end
 
 # This machine has a busted USB interface, we'll remove the tools and modules and other unused packages bluetooth bluez
 package %w(
-  modemmanager
+  bluetooth
+  bluez
+  task-laptop
   wireless-regdb
   wireless-tools
   wpasupplicant
@@ -43,56 +48,26 @@ end
 
 # disable loading kernel modules
 modules = %w(
-  b43
-  bcm5974
-  bluetooth
-  bnep
-  brcmsmac
-  btbcm
-  btintel
-  btrfs
-  btrtl
-  btusb
-  drm
-  drm_kms_helper
-  ehci_hcd
-  ehci_hcd
   ehci_pci
+  usbhid
+  bcm5974
+  apple_mfi_fastcharge
+  uas
+  usb_storage
+  ehci_hcd
+  btusb
+  uhci_hcd
+  usbcore
   firewire_core
   firewire_ohci
   firewire_sbp2
-  jfs
-  joydev
+  b43
+  brcmsmac
   mac80211
-  msdos
-  nouveau
+  ssb
   pcmcia
   pcmcia_core
-  qnx4
-  raid6_pq
-  snd
-  snd_hda_codec
-  snd_hda_codec_cirrus
-  snd_hda_codec_generic
-  snd_hda_codec_hdmi
-  snd_hda_core
-  snd_hda_intel
-  snd_hwdep
-  snd_pcm
-  snd_timer
-  soundcore
-  ssb
-  uas
-  ufs
-  uhci_hcd
-  usb_common
-  usb_storage
-  usbcommon
-  usbcore
-  usbhid
-  vfat
-  video
-  xfs
+  nouveau
 )
 
 modules.each do |mod|
