@@ -4,14 +4,14 @@
 #
 
 # mount the SD Card as an extra filesystem
-directory '/storage'
+# directory '/storage'
 
-mount '/storage' do
-  device '/dev/sda'
-  fstype 'ext4'
-  options 'rw'
-  action [:mount, :enable]
-end
+# mount '/storage' do
+#   device '/dev/sda'
+#   fstype 'ext4'
+#   options 'rw'
+#   action [:mount, :enable]
+# end
 
 # Fans https://github.com/dgraziotin/mbpfan
 
@@ -30,6 +30,7 @@ end
 # root@inez:# echo 0 > /sys/class/backlight/intel_backlight/bl_power
 execute 'echo 4 > /sys/class/backlight/intel_backlight/bl_power' do
   not_if 'grep 4 /sys/class/backlight/intel_backlight/bl_power'
+  ignore_failure true
 end
 
 replace_or_add 'disable lid closing suspend' do
@@ -44,7 +45,9 @@ service 'systemd-logind' do
 end
 
 package %w(
-  modemmanager
+  bluetooth
+  bluez
+  task-laptop
   wireless-regdb
   wireless-tools
   wpasupplicant
@@ -54,29 +57,12 @@ end
 
 # disable loading kernel modules
 modules = %w(
-  b43
-  bcm5974
-  bcma
-  bluetooth
-  brcmsmac
-  btbcm
-  btintel
   btrtl
+  btintel
+  btbcm
   btusb
-  cfg80211
+  bluetooth
   joydev
-  mac80211
-  snd
-  snd_hda_codec
-  snd_hda_codec_cirrus
-  snd_hda_codec_generic
-  snd_hda_codec_hdmi
-  snd_hda_core
-  snd_hda_intel
-  snd_hwdep
-  snd_pcm
-  snd_timer
-  soundcore
   thunderbolt
 )
 
